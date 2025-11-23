@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writeup Title | 404Ninjaaa</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">404Ninjaaa</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../pages/walkthroughs.html" class="active">Writeups</a></li>
+                    <li><a href="../pages/learning.html">Learning</a></li>
+                    <li><a href="../pages/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="content-wrapper">
+            <main class="main-content">
+                <article>
+                    <header style="margin-bottom: 40px;">
+                        <h1>Machine Name Writeup</h1>
+                        <div class="post-meta">
+                            <span>Date: November 23, 2025</span> •
+                            <span>Platform: HackTheBox</span> •
+                            <span>Difficulty: Easy</span>
+                        </div>
+                    </header>
+
+                    <section id="introduction">
+                        <h2>Introduction</h2>
+                        <p>
+                            Brief description of the machine. Mention the OS (Linux/Windows) and the key techniques used
+                            (e.g., SQL Injection, Kernel Exploit).
+                        </p>
+                    </section>
+
+                    <section id="reconnaissance">
+                        <h2>Reconnaissance</h2>
+                        <p>Started with an Nmap scan to identify open ports:</p>
+                        <pre><code>nmap -sC -sV -oA nmap/initial 10.10.10.x</code></pre>
+                        <p>
+                            The scan results showed port 22 (SSH) and port 80 (HTTP) open.
+                        </p>
+                    </section>
+
+                    <section id="exploitation">
+                        <h2>Exploitation</h2>
+                        <h3>Web Enumeration</h3>
+                        <p>
+                            Found a login page at <code>/login.php</code>. Tried default credentials but failed.
+                        </p>
+
+                        <h3>Gaining Access</h3>
+                        <p>
+                            Used SQLMap to dump the database and found a password hash.
+                        </p>
+                        <pre><code>sqlmap -u "http://10.10.10.x/login.php" --forms --dump</code></pre>
+                    </section>
+
+                    <section id="privilege-escalation">
+                        <h2>Privilege Escalation</h2>
+                        <p>
+                            After getting a shell as <code>www-data</code>, I ran <code>linpeas.sh</code> and found a
+                            SUID
+                            binary.
+                        </p>
+                    </section>
+
+                    <section id="conclusion">
+                        <h2>Conclusion</h2>
+                        <p>
+                            This box was a great exercise in basic web enumeration and standard Linux privilege
+                            escalation.
+                        </p>
+                    </section>
+                </article>
+            </main>
+
+            <aside class="toc-sidebar">
+                <div class="toc-title">Table of Contents</div>
+                <ul class="toc-list">
+                    <li><a href="#introduction">1. Introduction</a></li>
+                    <li><a href="#reconnaissance">2. Reconnaissance</a></li>
+                    <li><a href="#exploitation">3. Exploitation</a></li>
+                    <li><a href="#privilege-escalation">4. Privilege Escalation</a></li>
+                    <li><a href="#conclusion">5. Conclusion</a></li>
+                </ul>
+            </aside>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 404Ninjaaa. Built with HTML & CSS.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
